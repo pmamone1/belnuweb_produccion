@@ -391,7 +391,7 @@ def filtrar_pedido(request,filtro="1"):
     elif filtro=="2":
         filtro="Pendientes"
     elif filtro=="3":
-        filtro="Enviados"
+        filtro="Completados"
     elif filtro=="4":
         filtro="Cancelados"
     print("el filtro que esta pasando es =" +filtro)
