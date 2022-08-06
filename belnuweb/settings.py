@@ -1,4 +1,5 @@
 import environ
+import dj_database_url
 from pathlib import Path
 
 
@@ -19,7 +20,7 @@ DEBUG = False
 
 PASSWORD_GMAIL = env('PASSWORD_GMAIL')
 
-ALLOWED_HOSTS = ['https://belnuweb.herokuapp.com/']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost','127.0.0.1','belnuweb.herokuapp.com']
 
 
 # Application definition
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'colorfield',
     'betterforms',
     'computed_property',
-    
+    'whitenoise.runserver_nostatic',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
@@ -110,6 +112,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -145,6 +149,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
