@@ -1,2 +1,2 @@
-web: gunicorn belnuweb.wsgi --log-file -
+web: gunicorn belnuweb.wsgi
 
