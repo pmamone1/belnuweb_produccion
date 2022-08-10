@@ -1,7 +1,7 @@
 import environ
 import dj_database_url
 from pathlib import Path
-
+import os
 
 LOGGING = {
     'version': 1,
